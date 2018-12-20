@@ -1,6 +1,6 @@
 import template from './canvas.template';
 import './canvas.css';
-import player from './img/warrior2_sprite-min.png';
+import { getImagesObj } from '../loader/loader';
 
 class Canvas {
   static drawCanvas() {
@@ -8,80 +8,141 @@ class Canvas {
     contentEl.insertAdjacentHTML('afterBegin', template);
   }
 
-  static drawSprite() {
-    // Width and height for our canvas
-    const canvasWidth = 1600;
-    const canvasHeight = 900;
+  static drawPlayer() {
+    const player = getImagesObj().player[0];
+    
+    const spriteWidth = player.width;
+    const spriteHeight = player.height;
 
-    // the with and height of our sprite sheet
-    const spriteWidth = 1639; // warrior
-    const spriteHeight = 400;
-
-    // we are having 1 rows and 5 cols in the current sprite sheet
-    const rows = 1;
     const cols = 5;
+    const rows = 1;
 
-    // To get the width of a single sprite we divided the width of sprite with the number of cols
-    // because all the sprites are of equal width and height
-    const width = spriteWidth / cols;
+    const frameWidth = spriteWidth / cols;
+    const frameHeight = spriteHeight / rows;
 
-    // Same for the height we divided the height with number of rows
-    const height = spriteHeight / rows;
-
-    // Each row contains 8 frame and at start we will display the first frame (assuming the index from 0)
     let curFrame = 0;
-
-    // The total frame is 5
     const frameCount = 5;
 
-    // x and y coordinates to render the sprite
-    const x = 250;
-    const y = 460;
+    const dx = 250;
+    const dy = 460;
 
-    // x and y coordinates of the canvas to get the single frame
-    let srcX = 0;
-    const srcY = 0;
+    let sx = 0;
+    const sy = 0;
 
-    // Getting the canvas
-    const canvas = document.getElementById('canvas');
-
-    // setting width and height of the canvas
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-
-    // Establishing a context to the canvas
-    const ctx = canvas.getContext('2d');
-
-    // Creating an Image object for our character
-    // const character = new Image();
-    const character = new Image();
-
-    // Setting the source to the image file
-    // character.src = monster;
-    character.src = player;
+    const ctx = document.getElementById('canvas').getContext('2d');
 
     function updateFrame() {
-      // ctx.clearRect(x, y, width, height);
-      ctx.clearRect(x, y, width, height);
+      ctx.clearRect(dx, dy, frameWidth, frameHeight);
 
-      // Updating the frame index
-      curFrame = ++curFrame % frameCount;
-      // Calculating the x coordinate for spritesheet
-      // srcX = curFrame * width;
-      srcX = curFrame * width;
-      // srcXH = curFrame * widthH;
+      curFrame = (curFrame + 1) % frameCount;
+      sx = curFrame * frameWidth;
     }
 
     function draw() {
-      // Updating the frame
       updateFrame();
-      // Drawing the image
-      ctx.drawImage(character, srcX, srcY, width, height, x, y, width, height);
+      ctx.drawImage(player, sx, sy, frameWidth, frameHeight, dx, dy, frameWidth, frameHeight);
       // requestAnimationFrame(draw);
     }
     setInterval(draw, 250);
     // draw();
   }
+
+  static drawEnemy() {
+    const randomInteger = (min = 0, max = 2) => Math.floor(min + Math.random() * (max + 1 - min));
+
+    const breathInc = 0.1;
+    let breathDir = 1;
+    let breathAmt = 0;
+    const breathMax = 2;
+
+    const updateBreath = () => {
+      if (breathDir === 1) {
+        breathAmt -= breathInc;
+        if (breathAmt < -breathMax) {
+          breathDir = -1;
+        }
+      } else {
+        breathAmt += breathInc;
+        if (breathAmt > breathMax) {
+          breathDir = 1;
+        }
+      }
+    };
+
+    setInterval(updateBreath, 1000 / 30);
+
+    const head = getImagesObj().head[randomInteger()];
+    const body = getImagesObj().body[randomInteger()];
+
+    const leftLeg = getImagesObj().leftLeg[randomInteger()];
+    const rightLeg = getImagesObj().rightLeg[randomInteger()];
+
+    const leftArm = getImagesObj().leftArm[randomInteger()];
+    const rightArm = getImagesObj().rightArm[randomInteger()];
+
+    const dxHead = 920;
+    const dyHead = 470;
+
+    const dxBody = 950;
+    const dyBody = 600;
+
+    const dxLeftLeg = 940;
+    const dyLeftLeg = 760;
+
+    const dxRightLeg = 1000;
+    const dyRightLeg = 760;
+
+    const dxLeftArm = 1040;
+    const dyLeftArm = 640;
+
+    const dxRightArm = 890;
+    const dyRightArm = 640;
+
+    const ctx = document.getElementById('canvas').getContext('2d');
+
+    function updateFrame() {
+      ctx.clearRect(dxRightArm, dyRightArm, rightArm.width, rightArm.height);
+      ctx.clearRect(dxLeftLeg, dyLeftLeg, leftLeg.width, leftLeg.height);
+      ctx.clearRect(dxRightLeg, dyRightLeg, rightLeg.width, rightLeg.height);
+      ctx.clearRect(dxBody, dyBody, body.width, body.height);
+      ctx.clearRect(dxLeftArm, dyLeftArm, leftArm.width, leftArm.height);
+      ctx.clearRect(dxHead, dyHead, head.width, head.height);
+    }
+
+    function draw() {
+      updateFrame();
+      ctx.drawImage(rightArm, dxRightArm, dyRightArm - breathAmt);
+      ctx.drawImage(leftLeg, dxLeftLeg, dyLeftLeg);
+      ctx.drawImage(rightLeg, dxRightLeg, dyRightLeg);
+      ctx.drawImage(body, dxBody, dyBody);
+      ctx.drawImage(leftArm, dxLeftArm, dyLeftArm - breathAmt);
+      ctx.drawImage(head, dxHead, dyHead - breathAmt);
+
+      // requestAnimationFrame(draw);
+    }
+    // setInterval(updateBreath, 1000 / 60);
+    setInterval(draw, 250);
+    // draw();
+  }
+
+  // static drawText() {
+  //   const ctx = document.getElementById('canvas').getContext('2d');
+  //   console.log('ctx', ctx);
+  //   ctx.font = '20px Arial';
+  //   ctx.fillStyle = 'red';
+  //   ctx.fillText('Player2', 1010, 40);
+
+  //   // Create gradient
+  //   const grd = ctx.createLinearGradient(1060, 0, 1260, 0);
+  //   grd.addColorStop(0, 'red');
+  //   grd.addColorStop(0.4, 'green');
+
+  //   // Fill with gradient
+  //   ctx.fillStyle = grd;
+  //   ctx.fillRect(1060, 60, 200, 20);
+  //   ctx.strokeStyle = '#FF0000';
+  //   ctx.strokeRect(1060, 60, 200, 20);
+  // }
 }
 
 export default Canvas;
