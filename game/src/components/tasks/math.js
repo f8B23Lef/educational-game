@@ -55,7 +55,7 @@ const generateCompareTask = () => {
   return { question, task, answer };
 };
 
-const continueSequence = () => {
+const getSequence = () => {
   const arr = [];
   arr.push(randomInteger(-100, 100));
   const dif = randomInteger(-20, 20);
@@ -69,7 +69,7 @@ const continueSequence = () => {
 const generateSequenceTask = () => {
   const question = 'Sequence: ';
 
-  const arr = continueSequence();
+  const arr = getSequence();
 
   const answer = String(arr.pop());
   const task = arr.concat('?').join(', ');

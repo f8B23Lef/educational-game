@@ -20,3 +20,28 @@
   background-color: rgba(28, 196, 196, 0.8);
   box-shadow: 0 0 12px 0px rgba(0, 0, 0, 0.5);
 }
+
+.sortable-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style: none;
+}
+
+.sortable-list__item {
+  cursor: move;
+  border: 1px solid black;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: aqua;
+}
+
+.sortable-list__item:hover {
+  background-color: blueviolet;
+}
+
+/* .chosen {
+  color: red;
+  background-color: green;
+} */

@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2';
+import Sortable from 'sortablejs';
 import './modalDialog.css';
-import { spellButtonsTemplate, calculate } from './modalDialog.template';
+import { spellButtonsTemplate, dragTemplate, calculate } from './modalDialog.template';
 import generateMathTask from '../tasks/math';
 import generateEnglishTask from '../tasks/english';
 
@@ -29,6 +30,7 @@ export const showModalDialog = () => {
 
       document.querySelector('.drag-button').addEventListener('click', () => {
         console.log('click drag-drop');
+        showDragModalDialog();
       });
     },
   });
@@ -125,4 +127,47 @@ const showEnglishModalDialog = (task) => {
         // new turn
       }
     });
+};
+
+const areArraysEqual = ((arr1, arr2) => arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]));
+// JSON.stringify(arr1) === JSON.stringify(arr2)
+
+const showDragModalDialog = () => {
+  console.log('showDragModalDialog()');
+
+  Swal({
+    title: 'Drag&Drop',
+    html: dragTemplate([9, 2, 4, -3]),
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+  }).then(() => {
+    const res = [];
+    [...document.querySelector('.sortable-list').children].forEach(element => res.push(element.innerText));
+    if (areArraysEqual(res, ['-3', '2', '4', '9'])) {
+      console.log(':)');
+      // add animation
+      // count hp
+      // new turn
+      Swal({
+        title: 'You are right!',
+        type: 'success',
+        animation: false,
+        customClass: 'animated tada',
+      })
+        .then(() => showModalDialog());
+    } else {
+      console.log(':(');
+      Swal({
+        title: 'Noup :(',
+        type: 'error',
+        animation: false,
+        customClass: 'animated shake',
+      })
+        .then(() => showModalDialog());
+      // add animation
+      // count hp
+      // new turn
+    }
+  });
+  Sortable.create(document.querySelector('.sortable-list'));
 };
