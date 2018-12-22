@@ -17,6 +17,8 @@ import leftArm3 from './img/leftArms/leftArm3.png';
 import rightArm1 from './img/rightArms/rightArm1.png';
 import rightArm2 from './img/rightArms/rightArm2.png';
 import rightArm3 from './img/rightArms/rightArm3.png';
+import round from './img/additional/round.png';
+import nameContainer from './img/additional/name.png';
 
 const players = [player1];
 const heads = [head1, head2, head3];
@@ -25,10 +27,14 @@ const leftLegs = [leftLeg1, leftLeg2, leftLeg3];
 const rightLegs = [rightLeg1, rightLeg2, rightLeg3];
 const leftArms = [leftArm1, leftArm2, leftArm3];
 const rightArms = [rightArm1, rightArm2, rightArm3];
+const rounds = [round];
+const nameContainers = [nameContainer];
 
-const countImages = players.length + heads.length + bodies.length
+const countImages = players.length
+  + heads.length + bodies.length
   + leftLegs.length + rightLegs.length
-  + leftArms.length + rightArms.length;
+  + leftArms.length + rightArms.length
+  + rounds.length + nameContainers.length;
 let countLoadedImages = 0;
 
 const imagesObj = {
@@ -39,17 +45,11 @@ const imagesObj = {
   rightLeg: [],
   leftArm: [],
   rightArm: [],
+  round: [],
+  nameContainer: [],
 };
 
 const isReady = () => countImages === countLoadedImages;
-// let r = 0;
-// Object.keys(o).forEach((item) => {
-//   console.log(item);
-//   o[item].forEach((q) =>  {
-//   console.log(q);
-//   r++;
-//   })
-// });
 
 const formImagesObj = (arr, key, callback) => {
   arr.forEach((item) => {
@@ -77,34 +77,8 @@ export const loadImages = (callback) => {
   formImagesObj(rightLegs, 'rightLeg', callback);
   formImagesObj(leftArms, 'leftArm', callback);
   formImagesObj(rightArms, 'rightArm', callback);
-
-  // heads.forEach((item) => {
-  //   const img = new Image();
-  //   img.onload = () => {
-  //     imagesObj.head.push(img);
-  //     // if (images.length === 2) console.log('Ok');
-  //     console.log('imagesObj: ', imagesObj);
-  //   };
-  //   // img.src = `./img/${item}`;
-  //   img.src = item;
-  // });
-
-  // pathToHeads.forEach((item) => {
-  //   const img = new Image();
-  //   img.onload = () => {
-  //     if (item.includes('head')) {
-  //       imagesObj.head.push(img);
-  //     } else if (item.includes('body')) {
-  //       imagesObj.body.push(img);
-  //     }
-  //     console.log('imagesObj = ', imagesObj);
-
-  //     // if (isReady(pathToHeads.length)) {
-
-  //     // }
-  //   };
-  //   img.src = `images/${item}`;
-  // });
+  formImagesObj(rounds, 'round', callback);
+  formImagesObj(nameContainers, 'nameContainer', callback);
 };
 
 export const getImagesObj = () => imagesObj;

@@ -125,6 +125,19 @@ class Canvas {
     // draw();
   }
 
+  static drawRound() {
+    const ctx = document.getElementById('canvas').getContext('2d');
+    ctx.drawImage(getImagesObj().round[0], 600, 30);
+    ctx.drawImage(getImagesObj().nameContainer[0], 250, 40);
+    ctx.drawImage(getImagesObj().nameContainer[0], 950, 40);
+    ctx.font = '30px Georgia';
+    ctx.fillText('1', 630, 80);
+    ctx.fillStyle = 'green';
+    ctx.fillText('Player1', 300, 75);
+    ctx.fillStyle = 'red';
+    ctx.fillText('Enemy', 1000, 75);
+  }
+
   // static drawText() {
   //   const ctx = document.getElementById('canvas').getContext('2d');
   //   console.log('ctx', ctx);

@@ -1,0 +1,22 @@
+.spell-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spell-button {
+  display: block;
+  width: 100px;
+  height: 40px;
+  margin: 4px;
+  border-radius: 8px;
+  background-color: rgba(33, 252, 252, 0.8);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.spell-button:hover {
+  background-color: rgba(28, 196, 196, 0.8);
+  box-shadow: 0 0 12px 0px rgba(0, 0, 0, 0.5);
+}
