@@ -60,7 +60,6 @@ const formImagesObj = (arr, key, callback) => {
       if (isReady() && callback) {
         callback();
         console.log(imagesObj);
-        console.log(imagesObj.player[0].src);
       }
     };
     img.src = item;

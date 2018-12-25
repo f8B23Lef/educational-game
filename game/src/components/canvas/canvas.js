@@ -3,6 +3,10 @@ import './canvas.css';
 import { getImagesObj } from '../loader/loader';
 
 class Canvas {
+  // constructor() {
+  //   this.canvas = 4;
+  // }
+
   static drawCanvas() {
     const contentEl = document.querySelector('body');
     contentEl.insertAdjacentHTML('afterBegin', template);
@@ -10,7 +14,7 @@ class Canvas {
 
   static drawPlayer() {
     const player = getImagesObj().player[0];
-    
+
     const spriteWidth = player.width;
     const spriteHeight = player.height;
 
@@ -125,37 +129,65 @@ class Canvas {
     // draw();
   }
 
-  static drawRound() {
+  static drawPlayerName(name) {
     const ctx = document.getElementById('canvas').getContext('2d');
-    ctx.drawImage(getImagesObj().round[0], 600, 30);
-    ctx.drawImage(getImagesObj().nameContainer[0], 250, 40);
-    ctx.drawImage(getImagesObj().nameContainer[0], 950, 40);
     ctx.font = '30px Georgia';
-    ctx.fillText('1', 630, 80);
     ctx.fillStyle = 'green';
-    ctx.fillText('Player1', 300, 75);
-    ctx.fillStyle = 'red';
-    ctx.fillText('Enemy', 1000, 75);
+    ctx.fillText(name, 300, 75);
   }
 
-  // static drawText() {
-  //   const ctx = document.getElementById('canvas').getContext('2d');
-  //   console.log('ctx', ctx);
-  //   ctx.font = '20px Arial';
-  //   ctx.fillStyle = 'red';
-  //   ctx.fillText('Player2', 1010, 40);
+  static drawEnemyName(name) {
+    const ctx = document.getElementById('canvas').getContext('2d');
+    ctx.font = '30px Georgia';
+    ctx.fillStyle = 'red';
+    ctx.fillText(name, 1000, 75);
+  }
 
-  //   // Create gradient
-  //   const grd = ctx.createLinearGradient(1060, 0, 1260, 0);
-  //   grd.addColorStop(0, 'red');
-  //   grd.addColorStop(0.4, 'green');
+  static drawRound(round) {
+    const ctx = document.getElementById('canvas').getContext('2d');
+    // const canvas = document.getElementById('canvas');
+    // canvas.width = canvas.width;
+    // ctx.drawImage(getImagesObj().round[0], 600, 30);
+    // ctx.clearRect(630, 40, 250, 250);
+    // ctx.drawImage(getImagesObj().nameContainer[0], 250, 40);
+    // ctx.drawImage(getImagesObj().nameContainer[0], 950, 40);
+    ctx.font = '30px Georgia';
+    ctx.fillText(`Round ${round}`, 630, 80);
+    // ctx.fillStyle = 'green';
+    // ctx.fillText('Player1', 300, 75);
+    // ctx.fillStyle = 'red';
+    // ctx.fillText('Enemy', 1000, 75);
+  }
 
-  //   // Fill with gradient
-  //   ctx.fillStyle = grd;
-  //   ctx.fillRect(1060, 60, 200, 20);
-  //   ctx.strokeStyle = '#FF0000';
-  //   ctx.strokeRect(1060, 60, 200, 20);
-  // }
+  static drawPlayerHealth(hp) {
+    const ctx = document.getElementById('canvas').getContext('2d');
+    ctx.clearRect(200, 100, 200, 30);
+    // Create gradient
+    const grd = ctx.createLinearGradient(200, 0, 400, 0); // x0, y0, x1, y1
+    grd.addColorStop(0, 'red');
+    grd.addColorStop(0.4, 'green');
+
+    // Fill with gradient
+    ctx.fillStyle = grd;
+    ctx.fillRect(200, 100, hp * 2, 30); // x, y, w, h
+    ctx.strokeStyle = '#FF0000';
+    ctx.strokeRect(200, 100, 200, 30);
+  }
+
+  static drawEnemyHealth(hp) {
+    const ctx = document.getElementById('canvas').getContext('2d');
+    ctx.clearRect(1060, 100, 200, 30);
+    // Create gradient
+    const grd = ctx.createLinearGradient(1060, 0, 1260, 0); // x0, y0, x1, y1
+    grd.addColorStop(0, 'red');
+    grd.addColorStop(0.4, 'green');
+
+    // Fill with gradient
+    ctx.fillStyle = grd;
+    ctx.fillRect(1060, 100, hp * 2, 30); // x, y, w, h
+    ctx.strokeStyle = '#FF0000';
+    ctx.strokeRect(1060, 100, 200, 30);
+  }
 }
 
 export default Canvas;
