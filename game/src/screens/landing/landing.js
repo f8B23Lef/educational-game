@@ -1,3 +1,4 @@
+import 'bootstrap';
 import './landing.css';
 
 // import Swal from 'sweetalert2';
@@ -21,8 +22,14 @@ const drawLandingScreen = () => {
 export default () => {
   drawLandingScreen();
 
-  document.querySelector('.button-start').addEventListener('click', () => {
-    console.log('click');
-    showLoginDialog();
+  document.querySelectorAll('.button-start').forEach((button) => {
+    button.addEventListener('click', () => {
+      console.log('click');
+      showLoginDialog();
+    });
   });
+  // document.querySelector('.button-start').addEventListener('click', () => {
+  //   console.log('click');
+  //   showLoginDialog();
+  // });
 };

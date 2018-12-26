@@ -1,28 +1,11 @@
-#screenshots {
-  display: flex;
-  flex-wrap: wrap;
-  /* height: 500px; */
-  background-color: teal;
+section {
+  padding: 100px 0;
 }
 
-#contacts {
-  height: 300px;
-  background-color: blueviolet;
+.text-faded.mb-5 {
+  font-size: 18px;
 }
 
-div.gallery {
-  margin: 5px;
-  border: 1px solid #ccc;
-  float: left;
-  width: 400px;
-}
-
-div.gallery:hover {
-  border: 1px solid #777;
-  opacity: 0.8;
-}
-
-div.gallery img {
-  width: 100%;
-  height: auto;
+.col-lg-4.col-sm-6 {
+  padding: 5px;
 }

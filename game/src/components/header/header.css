@@ -3,16 +3,10 @@ header {
   background: #000000 url('./img/background.png') no-repeat; 
   background-size: cover;
   height: 900px;
-  text-align: center;
-}
-
-h1 {
-  padding-top: 150px;
-  align-items: center;
 }
 
 .button-start {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   border: none;
   color: white;
   padding: 15px 32px;
