@@ -1,6 +1,6 @@
-const adjectives = ['Sullen', 'Sinister'];
-const title = ['Warrior', 'Berserk'];
-const names = ['Tom', 'Bob'];
+const adjectives = ['Brave', 'Calm', 'Clever', 'Dangerous', 'Deaf', 'Dexterous', 'Invincible', 'Hysterical', 'Risky', 'Sullen', 'Sinister', 'Slick', 'Warlike'];
+const title = ['Berserk', 'Commander', 'Hero', 'Knight', 'Master', 'Necromancer', 'Rogue', 'Overlord', 'Shadow', 'Wanderer', 'Warrior'];
+const names = ['Arnold', 'Bob', 'Brian', 'Caleb', 'Corey', 'Darren', 'Derek', 'Ezekiel', 'Gareth', 'Graham', 'Grant', 'Hubert', 'Kurt', 'Sam', 'Tom'];
 
 const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
 
