@@ -1,0 +1,20 @@
+section.score {
+  padding: 10px 0px;
+  overflow: auto;
+}
+
+.table {
+  margin: 20px auto;
+  width: 90%;
+}
+
+.button-score {
+  width: 120px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+}
+
+.button-score:hover {
+  background-color: #0e9651;
+}

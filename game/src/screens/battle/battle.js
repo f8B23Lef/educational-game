@@ -6,6 +6,7 @@ import Canvas from '../../components/canvas/canvas';
 import Player from '../../components/players/player';
 import Enemy from '../../components/players/enemy';
 import { showSpellDialog, showGameOverMessage, showNewRoundMessage, saveCallback as sendCallback } from '../../components/modalDialog/modalDialog';
+import renderScoreScreen from '../score/score';
 // import showSpellDialog from '../../components/gameManager/gameManager';
 
 // let playerName = null;
@@ -30,10 +31,24 @@ const checkPlayerWin = () => {
   return false;
 };
 
+const appendScoreToLocalStorage = (key = 'ice-wastelands') => {
+  console.log('appendScoreToLocalStorage()');
+  let score = localStorage.getItem(key);
+  score = score ? JSON.parse(score) : {};
+
+  score[o.player.name] = o.player.score;
+
+  localStorage.setItem(key, JSON.stringify(score));
+
+  console.log(JSON.parse(localStorage.getItem(key)));
+};
+
 const manageGame = async (isCorrect) => {
   if (isCorrect) {
     o.enemy.hp -= o.player.strength;
     await Canvas.drawEnemyHealth(o.enemy.hp);
+    // const audio = new Audio('./pain.mp3');
+    // await audio.play();
     // animation + sound
   } else {
     o.player.hp -= o.enemy.strength;
@@ -44,7 +59,7 @@ const manageGame = async (isCorrect) => {
   // console.log('checkPlayerWin = ', checkPlayerWin());
   if (!checkGameOver()) {
     console.log('show');
-    showSpellDialog();
+    await showSpellDialog();
   } else if (checkPlayerWin()) {
     console.log('draw');
     await showNewRoundMessage();
@@ -54,7 +69,10 @@ const manageGame = async (isCorrect) => {
     await Canvas.drawRound(o.player.round);
   } else {
     console.log('game over');
-    showGameOverMessage();// score data param
+    await appendScoreToLocalStorage();
+    // await Canvas.drawRip();
+    await renderScoreScreen();
+    // showGameOverMessage();// score data param
   }
 
   console.log('pHP = ', o.player.hp, 'eHP: ', o.enemy.hp);
@@ -64,6 +82,7 @@ const manageGame = async (isCorrect) => {
 
 
 const drawBattleScreen = () => {
+  console.log('drawBattleScreen()');
   o.enemy = new Enemy();
 
   $('body').empty();
