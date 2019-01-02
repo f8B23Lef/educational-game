@@ -17,8 +17,6 @@ import leftArm3 from './img/leftArms/leftArm3.png';
 import rightArm1 from './img/rightArms/rightArm1.png';
 import rightArm2 from './img/rightArms/rightArm2.png';
 import rightArm3 from './img/rightArms/rightArm3.png';
-import round from './img/additional/round.png';
-import nameContainer from './img/additional/name.png';
 
 const players = [player1];
 const heads = [head1, head2, head3];
@@ -27,14 +25,11 @@ const leftLegs = [leftLeg1, leftLeg2, leftLeg3];
 const rightLegs = [rightLeg1, rightLeg2, rightLeg3];
 const leftArms = [leftArm1, leftArm2, leftArm3];
 const rightArms = [rightArm1, rightArm2, rightArm3];
-const rounds = [round];
-const nameContainers = [nameContainer];
 
 const countImages = players.length
   + heads.length + bodies.length
   + leftLegs.length + rightLegs.length
-  + leftArms.length + rightArms.length
-  + rounds.length + nameContainers.length;
+  + leftArms.length + rightArms.length;
 let countLoadedImages = 0;
 
 const imagesObj = {
@@ -45,9 +40,9 @@ const imagesObj = {
   rightLeg: [],
   leftArm: [],
   rightArm: [],
-  round: [],
-  nameContainer: [],
 };
+
+let isLoaded = false;
 
 const isReady = () => countImages === countLoadedImages;
 
@@ -58,6 +53,7 @@ const formImagesObj = (arr, key, callback) => {
       imagesObj[`${key}`].push(img);
       countLoadedImages += 1;
       if (isReady() && callback) {
+        isLoaded = true;
         callback();
         console.log(imagesObj);
       }
@@ -67,17 +63,20 @@ const formImagesObj = (arr, key, callback) => {
 };
 
 export const loadImages = (callback) => {
+  console.log('loadImages()');
   // const pathToHeads = require.context('./img', false).keys();
   // console.log(pathToHeads);
-  formImagesObj(players, 'player', callback);
-  formImagesObj(heads, 'head', callback);
-  formImagesObj(bodies, 'body', callback);
-  formImagesObj(leftLegs, 'leftLeg', callback);
-  formImagesObj(rightLegs, 'rightLeg', callback);
-  formImagesObj(leftArms, 'leftArm', callback);
-  formImagesObj(rightArms, 'rightArm', callback);
-  formImagesObj(rounds, 'round', callback);
-  formImagesObj(nameContainers, 'nameContainer', callback);
+  if (!isLoaded) {
+    formImagesObj(players, 'player', callback);
+    formImagesObj(heads, 'head', callback);
+    formImagesObj(bodies, 'body', callback);
+    formImagesObj(leftLegs, 'leftLeg', callback);
+    formImagesObj(rightLegs, 'rightLeg', callback);
+    formImagesObj(leftArms, 'leftArm', callback);
+    formImagesObj(rightArms, 'rightArm', callback);
+  } else {
+    callback();
+  }
 };
 
 export const getImagesObj = () => imagesObj;
