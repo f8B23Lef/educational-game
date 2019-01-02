@@ -36,7 +36,9 @@ const appendScoreToLocalStorage = (key = 'ice-wastelands') => {
   let score = localStorage.getItem(key);
   score = score ? JSON.parse(score) : {};
 
-  score[o.player.name] = o.player.score;
+  if (!score[o.player.name] || score[o.player.name] < o.player.score) {
+    score[o.player.name] = o.player.score;
+  }
 
   localStorage.setItem(key, JSON.stringify(score));
 
