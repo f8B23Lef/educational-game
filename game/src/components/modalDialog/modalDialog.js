@@ -1,16 +1,14 @@
 import 'regenerator-runtime/runtime';
 import 'bootstrap';
-
 import Swal from 'sweetalert2';
 import Sortable from 'sortablejs';
 import './modalDialog.css';
-import { spellButtonsTemplate, dragTemplate, calculate } from './modalDialog.template';
+import { spellButtonsTemplate, dragTemplate } from './modalDialog.template';
 import generateMathTask from '../tasks/math';
 import generateEnglishTask from '../tasks/english';
 import generateDragTask from '../tasks/drag';
-// import gameManager from '../gameManager/gameManager';
-
-// let callBackFun = null;
+import generateRadioTask from '../tasks/radio';
+import generateImageTask from '../tasks/image';
 
 let callBack = null;
 
@@ -98,6 +96,71 @@ const showDragModalDialog = (task) => {
   Sortable.create(document.querySelector('.sortable-list'));
 };
 
+const showRadioModalDialog = async (task) => {
+  console.log('showRadioModalDialog()', task);
+
+  const options = {};
+  task.task[1].forEach((el) => {
+    options[el] = el;
+  });
+
+  let isCorrect = true;
+  const { value: result } = await Swal({
+    title: task.question,
+    text: task.task[0],
+    input: 'radio',
+    inputOptions: options,
+    // inputClass: 'english',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+  });
+  console.log('result: ', result, task.answer, result === task.answer);
+  if (task.answer === result) {
+    console.log(':)');
+    await showCorrectMessage();
+  } else {
+    console.log(':(');
+    isCorrect = false;
+    await showIncorrectMessage();
+  }
+
+  await callBack(isCorrect);
+};
+
+const showImageModalDialog = async (task) => {
+  console.log('showImageModalDialog()', task);
+
+  const options = {};
+  task.task[1].forEach((el) => {
+    options[el] = el;
+  });
+
+  let isCorrect = true;
+  const { value: result } = await Swal({
+    title: task.question,
+    imageUrl: task.task[0],
+    imageWidth: 150,
+    imageHeight: 150,
+    imageAlt: options,
+    input: 'radio',
+    inputOptions: options,
+    // inputClass: 'english',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+  });
+  console.log('result: ', result, task.answer, result === task.answer);
+  if (task.answer === result) {
+    console.log(':)');
+    await showCorrectMessage();
+  } else {
+    console.log(':(');
+    isCorrect = false;
+    await showIncorrectMessage();
+  }
+
+  await callBack(isCorrect);
+};
+
 export const showSpellDialog = () => {
   Swal({
     title: 'Choose spell:',
@@ -125,6 +188,18 @@ export const showSpellDialog = () => {
         const task = generateDragTask();
         showDragModalDialog(task);
       });
+
+      document.querySelector('.radio-button').addEventListener('click', () => {
+        console.log('click radio-drop');
+        const task = generateRadioTask();
+        showRadioModalDialog(task);
+      });
+
+      document.querySelector('.image-button').addEventListener('click', () => {
+        console.log('click image-drop');
+        const task = generateImageTask();
+        showImageModalDialog(task);
+      });
     },
   });
 };
@@ -149,15 +224,15 @@ export const showNewRoundMessage = () => {
   });
 };
 
-export const showGameOverMessage = () => {
-  Swal({
-    title: 'Game over',
-    text: 'score...',
-    grow: 'fullscreen',
-    allowOutsideClick: 'false',
-    allowEscapeKey: 'false',
-  });
-};
+// export const showGameOverMessage = () => {
+//   Swal({
+//     title: 'Game over',
+//     html: scoreTableTemplate,
+//     grow: 'fullscreen',
+//     allowOutsideClick: 'false',
+//     allowEscapeKey: 'false',
+//   });
+// };
 
 const showCorrectMessage = () => Swal({
   title: 'You are right!',
