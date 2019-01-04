@@ -22,14 +22,12 @@ const drawLandingScreen = () => {
 export default () => {
   drawLandingScreen();
 
+  document.querySelector('.button-start').focus();
+
   document.querySelectorAll('.button-start').forEach((button) => {
     button.addEventListener('click', () => {
       console.log('click');
       showLoginDialog();
     });
   });
-  // document.querySelector('.button-start').addEventListener('click', () => {
-  //   console.log('click');
-  //   showLoginDialog();
-  // });
 };

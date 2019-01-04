@@ -16,6 +16,19 @@ export default () => {
   //   console.log('click score');
   //   // renderLandingScreen();
   // });
+
+  console.log('fghfgh', document.querySelector('.score'));
+
+  document.querySelector('.button-score').focus();
+
+  // document.querySelector('div').addEventListener('keydown', (key) => {
+  //   console.log('click score -> ', key);
+
+  //   if (key.code === 'Enter') {
+  //     console.log('enter');
+  //   }
+  // });
+
   document.querySelector('.button-score').addEventListener('click', () => {
     console.log('click score');
     $('body').empty();

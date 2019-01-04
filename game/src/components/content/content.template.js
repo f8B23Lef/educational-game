@@ -5,7 +5,7 @@ export default `
       <div class="col-lg-8 mx-auto text-center">
         <h2 class="section-heading text-white">What is waiting for you?</h2>
         <p class="text-faded mb-4">Help your character to survive. Use your knowledge to solve tasks.</p>
-        <button class="button-start">Play</button>
+        <button class="button-start btn btn-primary" type="button">Play</button>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@ export default `
 <section class="bg-dark text-white">
   <div class="container text-center">
     <h2 class="mb-4">Let's play!</h2>
-    <button class="button-start">Play</button>
+    <button class="button-start btn btn-primary" type="button">Play</button>
   </div>
 </section>
 

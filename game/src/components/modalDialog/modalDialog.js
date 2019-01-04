@@ -170,6 +170,7 @@ export const showSpellDialog = () => {
     allowEscapeKey: false,
     animation: false,
     customClass: 'animated zoomIn',
+    stopKeydownPropagation: false,
     onBeforeOpen: () => {
       document.querySelector('.math-button').addEventListener('click', () => {
         console.log('click math');
@@ -201,6 +202,43 @@ export const showSpellDialog = () => {
         showImageModalDialog(task);
       });
     },
+    onOpen: () => {
+      console.log('onOpen()', document.activeElement);
+
+      document.querySelector('.swal2-content').addEventListener('keydown', (key) => {
+        console.log('click on -> ', key);
+
+        const curSpellButton = document.activeElement;
+
+        if (key.code === 'ArrowUp') {
+          console.log('up');
+          let prevSpellButton = curSpellButton.previousElementSibling;
+
+          if (curSpellButton === curSpellButton.parentElement.firstElementChild) {
+            prevSpellButton = curSpellButton.parentElement.lastElementChild;
+          }
+
+          curSpellButton.classList.remove('hover');
+          prevSpellButton.focus();
+          prevSpellButton.classList.add('hover');
+        } else if (key.code === 'ArrowDown') {
+          console.log('down');
+          let nextSpellButton = curSpellButton.nextElementSibling;
+
+          if (curSpellButton === curSpellButton.parentElement.lastElementChild) {
+            nextSpellButton = curSpellButton.parentElement.firstElementChild;
+          }
+
+          curSpellButton.classList.remove('hover');
+          nextSpellButton.focus();
+          nextSpellButton.classList.add('hover');
+        } else if (key.code === 'Tab') {
+          console.log('tab');
+          key.preventDefault();
+          key.stopImmediatePropagation();
+        }
+      });
+    },
   });
 };
 // Example with HTML form
@@ -224,19 +262,23 @@ export const showNewRoundMessage = () => {
   });
 };
 
-// export const showGameOverMessage = () => {
-//   Swal({
-//     title: 'Game over',
-//     html: scoreTableTemplate,
-//     grow: 'fullscreen',
-//     allowOutsideClick: 'false',
-//     allowEscapeKey: 'false',
-//   });
-// };
+export const showGameOverMessage = () => {
+  Swal({
+    title: 'Game over',
+    // html: scoreTableTemplate,
+    // grow: 'fullscreen',
+    allowOutsideClick: 'false',
+    allowEscapeKey: 'false',
+    animation: false,
+    customClass: 'animated bounceInDown',
+  });
+};
 
 const showCorrectMessage = () => Swal({
   title: 'You are right!',
   type: 'success',
+  showConfirmButton: false,
+  timer: 1200,
   allowOutsideClick: 'false',
   allowEscapeKey: 'false',
   animation: false,
@@ -254,6 +296,8 @@ const showCorrectMessage = () => Swal({
 const showIncorrectMessage = () => Swal({
   title: 'Noup :(',
   type: 'error',
+  showConfirmButton: false,
+  timer: 1200,
   allowOutsideClick: 'false',
   allowEscapeKey: 'false',
   animation: false,

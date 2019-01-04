@@ -9,7 +9,7 @@ export default `
       </div>
       <div class="col-lg-8 mx-auto">
         <p class="text-faded mb-5">On the planet Florn there was a climatic disaster. The whole planet was covered with snow and ice. Now to survive the inhabitants of this planet have to fight with each other for resources.</p>
-        <button class="button-start">Play</button>
+        <button class="button-start btn btn-primary" type="button">Play</button>
       </div>
     </div>
   </div>

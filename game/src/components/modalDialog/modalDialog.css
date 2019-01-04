@@ -17,7 +17,11 @@
   outline: none;
 }
 
-.spell-button:hover {
+.spell-button:focus {
+   outline: 0;
+}
+
+.spell-button:hover, .hover {
   background-color: rgba(28, 196, 196, 0.8);
   box-shadow: 0 0 12px 0px rgba(0, 0, 0, 0.3);
 }
