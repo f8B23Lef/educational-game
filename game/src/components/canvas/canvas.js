@@ -27,8 +27,8 @@ class Canvas {
     let curFrame = 0;
     const frameCount = 5;
 
-    const dx = 250;
-    const dy = 460;
+    const dx = 160;
+    const dy = 440;
 
     let sx = 0;
     const sy = 0;
@@ -43,6 +43,15 @@ class Canvas {
     }
 
     function draw() {
+      // setTimeout(() => {
+      //   requestAnimationFrame(draw);
+      //   // Drawing code goes here
+      //   updateFrame();
+      //   ctx.drawImage(player, sx, sy, frameWidth, frameHeight, dx, dy, frameWidth, frameHeight);
+      //   // requestAnimationFrame(draw);
+      // }, 250);
+
+
       updateFrame();
       ctx.drawImage(player, sx, sy, frameWidth, frameHeight, dx, dy, frameWidth, frameHeight);
       // requestAnimationFrame(draw);
@@ -84,23 +93,23 @@ class Canvas {
     const leftArm = getImagesObj().leftArm[randomInteger()];
     const rightArm = getImagesObj().rightArm[randomInteger()];
 
-    const dxHead = 920;
-    const dyHead = 470;
+    const dxHead = 1030;
+    const dyHead = 440;
 
-    const dxBody = 950;
-    const dyBody = 600;
+    const dxBody = 1060;
+    const dyBody = 570;
 
-    const dxLeftLeg = 940;
-    const dyLeftLeg = 760;
+    const dxLeftLeg = 1050;
+    const dyLeftLeg = 730;
 
-    const dxRightLeg = 1000;
-    const dyRightLeg = 760;
+    const dxRightLeg = 1110;
+    const dyRightLeg = 730;
 
-    const dxLeftArm = 1040;
-    const dyLeftArm = 640;
+    const dxLeftArm = 1150;
+    const dyLeftArm = 610;
 
-    const dxRightArm = 890;
-    const dyRightArm = 640;
+    const dxRightArm = 1000;
+    const dyRightArm = 610;
 
     const ctx = document.getElementById('canvas').getContext('2d');
 
@@ -122,24 +131,24 @@ class Canvas {
       ctx.drawImage(leftArm, dxLeftArm, dyLeftArm - breathAmt);
       ctx.drawImage(head, dxHead, dyHead - breathAmt);
 
-      // requestAnimationFrame(draw);
+      requestAnimationFrame(draw);
     }
     // setInterval(updateBreath, 1000 / 60);
-    setInterval(draw, 250);
-    // draw();
+    // setInterval(draw, 250);
+    draw();
   }
 
   static drawPlayerName(name) {
     const ctx = document.getElementById('canvas').getContext('2d');
     ctx.font = '30px Georgia';
-    ctx.fillStyle = 'green';
+    ctx.fillStyle = 'white';
     ctx.fillText(name, 300, 75);
   }
 
   static drawEnemyName(name) {
     const ctx = document.getElementById('canvas').getContext('2d');
     ctx.font = '30px Georgia';
-    ctx.fillStyle = 'red';
+    ctx.fillStyle = 'white';
     ctx.fillText(name, 1000, 75);
   }
 
@@ -151,7 +160,8 @@ class Canvas {
     // ctx.clearRect(630, 40, 250, 250);
     // ctx.drawImage(getImagesObj().nameContainer[0], 250, 40);
     // ctx.drawImage(getImagesObj().nameContainer[0], 950, 40);
-    ctx.font = '30px Georgia';
+    ctx.font = '30px Roboto, Georgia';
+    ctx.fillStyle = 'white';
     ctx.fillText(`Round ${round}`, 630, 80);
     // ctx.fillStyle = 'green';
     // ctx.fillText('Player1', 300, 75);
@@ -188,6 +198,82 @@ class Canvas {
     ctx.strokeStyle = '#FF0000';
     ctx.strokeRect(1060, 100, 200, 30);
   }
+
+  static drawFireball() {
+    console.log('drawFireball()');
+
+    const fireball = getImagesObj().fireball[0];
+
+    const ctx = document.getElementById('canvas').getContext('2d');
+    // ctx.save();ctx.restore();
+    let x = 450;
+    const y = 500;
+    let requestID = null;
+
+    function update() {
+      // if don't substarct 5 it leaves a trail of fireball
+      ctx.clearRect(x - 5, y, fireball.width, fireball.height);
+    }
+
+    function draw() {
+      update();
+
+      if (x > 840) {
+        cancelAnimationFrame(requestID);
+        return;
+      }
+
+      ctx.drawImage(fireball, x, y);
+      x += 7;
+
+      requestID = requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  static drawIceArrow() {
+    console.log('drawIceArrow()', getImagesObj());
+
+    // const freezeImg = new Image();
+    // freezeImg.src = freeze;
+
+    const iceArrow = getImagesObj().iceArrow[0];
+
+    const ctx = document.getElementById('canvas').getContext('2d');
+    // ctx.save();ctx.restore();
+    let x = 900;
+    const y = 500;
+    let requestID = null;
+
+    function update() {
+      // if don't add 7 it leaves a trail of iceArrow
+      ctx.clearRect(x + 7, y, iceArrow.width, iceArrow.height);
+    }
+
+    function draw() {
+      update();
+
+      if (x < 420) {
+        cancelAnimationFrame(requestID);
+        return;
+      }
+
+      ctx.drawImage(iceArrow, x, y);
+      x -= 7;
+
+      requestID = requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  // static drawRip() {
+  //   console.log('drawRip()');
+  //   const ctx = document.getElementById('canvas').getContext('2d');
+  //   // ctx.clearRect(1060, 100, 200, 30);
+  //   const ripImg = new Image();
+  //   ripImg.src = 'https://banner2.kisspng.com/20180215/tvq/kisspng-headstone-drawing-cartoon-clip-art-above-cliparts-5a85d0244a90e2.2645982415187190123054.jpg';
+  //   ctx.drawImage(ripImg, 1000, 500);
+  // }
 }
 
 export default Canvas;

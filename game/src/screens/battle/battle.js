@@ -1,6 +1,11 @@
 import Swal from 'sweetalert2';
 import $ from 'jquery';
 
+import iceArrow from './sounds/iceArrow.mp3';
+import fireball from './sounds/fireball.mp3';
+import painPlayer from './sounds/painPlayer.mp3';
+import painEnemy from './sounds/painEnemy.mp3';
+
 import { loadImages } from '../../components/loader/loader';
 import Canvas from '../../components/canvas/canvas';
 import Player from '../../components/players/player';
@@ -45,25 +50,14 @@ const appendScoreToLocalStorage = (key = 'ice-wastelands') => {
   console.log(JSON.parse(localStorage.getItem(key)));
 };
 
-const manageGame = async (isCorrect) => {
-  if (isCorrect) {
-    o.enemy.hp -= o.player.strength;
-    await Canvas.drawEnemyHealth(o.enemy.hp);
-    // const audio = new Audio('./pain.mp3');
-    // await audio.play();
-    // animation + sound
-  } else {
-    o.player.hp -= o.enemy.strength;
-    // animation + sound
-    await Canvas.drawPlayerHealth(o.player.hp);
-  }
-  // console.log('checkGameOver = ', checkGameOver());
-  // console.log('checkPlayerWin = ', checkPlayerWin());
-  if (!checkGameOver()) {
+const tmp = async () => {
+  if (await !checkGameOver()) {
     console.log('show');
     await showSpellDialog();
-  } else if (checkPlayerWin()) {
+  } else if (await checkPlayerWin()) {
     console.log('draw');
+    const audio = new Audio(painEnemy);
+    await audio.play();
     await showNewRoundMessage();
     console.log('draw2');
     await drawBattleScreen();
@@ -71,6 +65,8 @@ const manageGame = async (isCorrect) => {
     await Canvas.drawRound(o.player.round);
   } else {
     console.log('game over');
+    const audio = new Audio(painPlayer);
+    await audio.play();
     await appendScoreToLocalStorage();
     // await Canvas.drawRip();
     await renderScoreScreen();
@@ -80,6 +76,54 @@ const manageGame = async (isCorrect) => {
   console.log('pHP = ', o.player.hp, 'eHP: ', o.enemy.hp);
   // console.log('checkGameOver = ', checkGameOver());
   // return checkGameOver();
+};
+
+const manageGame = async (isCorrect) => {
+  if (isCorrect) {
+    o.enemy.hp -= o.player.strength;
+    // animation + sound
+    await Canvas.drawFireball();
+    const audio = new Audio(fireball);
+    await audio.play();
+    await Canvas.drawEnemyHealth(o.enemy.hp);
+  } else {
+    o.player.hp -= o.enemy.strength;
+    // animation + sound
+    await Canvas.drawIceArrow();
+    const audio = new Audio(iceArrow);
+    await audio.play();
+    // setTimeout(Canvas.drawPlayerHealth(o.player.hp), 5000);
+    await Canvas.drawPlayerHealth(o.player.hp);
+  }
+
+  setTimeout(tmp, 1500);
+  // // console.log('checkGameOver = ', checkGameOver());
+  // // console.log('checkPlayerWin = ', checkPlayerWin());
+  // if (await !checkGameOver()) {
+  //   console.log('show');
+  //   await showSpellDialog();
+  // } else if (await checkPlayerWin()) {
+  //   console.log('draw');
+  //   const audio = new Audio(painEnemy);
+  //   await audio.play();
+  //   await showNewRoundMessage();
+  //   console.log('draw2');
+  //   await drawBattleScreen();
+  //   console.log('draw3');
+  //   await Canvas.drawRound(o.player.round);
+  // } else {
+  //   console.log('game over');
+  //   const audio = new Audio(painPlayer);
+  //   await audio.play();
+  //   await appendScoreToLocalStorage();
+  //   // await Canvas.drawRip();
+  //   await renderScoreScreen();
+  //   // showGameOverMessage();// score data param
+  // }
+
+  // console.log('pHP = ', o.player.hp, 'eHP: ', o.enemy.hp);
+  // // console.log('checkGameOver = ', checkGameOver());
+  // // return checkGameOver();
 };
 
 

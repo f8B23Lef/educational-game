@@ -1,4 +1,4 @@
-import player1 from './img/players/warrior2.png';
+import player from './img/players/warrior.png';
 import head1 from './img/heads/head1.png';
 import head2 from './img/heads/head2.png';
 import head3 from './img/heads/head3.png';
@@ -17,19 +17,25 @@ import leftArm3 from './img/leftArms/leftArm3.png';
 import rightArm1 from './img/rightArms/rightArm1.png';
 import rightArm2 from './img/rightArms/rightArm2.png';
 import rightArm3 from './img/rightArms/rightArm3.png';
+import fireball from './img/spellEffects/fireball.png';
+import iceArrow from './img/spellEffects/iceArrow.png';
 
-const players = [player1];
+const players = [player];
 const heads = [head1, head2, head3];
 const bodies = [body1, body2, body3];
 const leftLegs = [leftLeg1, leftLeg2, leftLeg3];
 const rightLegs = [rightLeg1, rightLeg2, rightLeg3];
 const leftArms = [leftArm1, leftArm2, leftArm3];
 const rightArms = [rightArm1, rightArm2, rightArm3];
+const fireballs = [fireball];
+const iceArrows = [iceArrow];
 
 const countImages = players.length
   + heads.length + bodies.length
   + leftLegs.length + rightLegs.length
-  + leftArms.length + rightArms.length;
+  + leftArms.length + rightArms.length
+  + fireballs.length + iceArrows.length;
+
 let countLoadedImages = 0;
 
 const imagesObj = {
@@ -40,6 +46,8 @@ const imagesObj = {
   rightLeg: [],
   leftArm: [],
   rightArm: [],
+  fireball: [],
+  iceArrow: [],
 };
 
 let isLoaded = false;
@@ -74,6 +82,8 @@ export const loadImages = (callback) => {
     formImagesObj(rightLegs, 'rightLeg', callback);
     formImagesObj(leftArms, 'leftArm', callback);
     formImagesObj(rightArms, 'rightArm', callback);
+    formImagesObj(fireballs, 'fireball', callback);
+    formImagesObj(iceArrows, 'iceArrow', callback);
   } else {
     callback();
   }
