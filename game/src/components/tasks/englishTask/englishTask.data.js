@@ -195,19 +195,3 @@ export default {
     ],
   },
 };
-
-// class EnglishTask {
-//   static generateEnglishTask() {
-//     const typeTasks = Object.keys(englishTasks);
-//     const indexTypeTask = randomInteger(0, typeTasks.length - 1);
-//     const { question } = englishTasks[typeTasks[indexTypeTask]];
-
-//     const { tasks } = englishTasks[typeTasks[indexTypeTask]];
-//     const indexTask = randomInteger(0, tasks.length - 1);
-//     const { task, answer } = tasks[indexTask];
-
-//     return { question, task, answer };
-//   }
-// }
-
-// export default EnglishTask;

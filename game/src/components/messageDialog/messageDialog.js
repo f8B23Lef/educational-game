@@ -28,7 +28,6 @@ class MessageDialog {
   }
 
   static showNewRoundMessage() {
-    console.log('showNewRoundMessage()');
     return Swal({
       title: 'New round',
       allowOutsideClick: 'false',
@@ -39,7 +38,6 @@ class MessageDialog {
   }
 
   static showGameOverMessage() {
-    console.log('showGameOverMessage()');
     return Swal({
       title: 'Game over',
       allowOutsideClick: 'false',

@@ -77,12 +77,4 @@ const generateSequenceTask = () => {
   return { question, task, answer };
 };
 
-// const ascSort = (arr) => arr.sort();
-// const descSort = (arr) => arr.sort().reverse();
-
 export default [generateCalculateTask, generateCompareTask, generateSequenceTask];
-
-// export default () => {
-//   const index = randomInteger(0, mathTaskTypes.length - 1);
-//   return mathTaskTypes[index]();
-// };

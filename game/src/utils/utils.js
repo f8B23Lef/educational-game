@@ -32,5 +32,3 @@ export const generateMathTask = (mathTaskTypes) => {
   const index = randomInteger(0, mathTaskTypes.length - 1);
   return mathTaskTypes[index]();
 };
-
-// export default randomInteger;

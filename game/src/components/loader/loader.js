@@ -76,13 +76,11 @@ class Loader {
   }
 
   loadAssets() {
-    console.log(this.countLoadedAssets, this.countAssets);
     this.loadImages();
     this.loadSounds();
   }
 
   loadImages() {
-    console.log('loadImages()');
     this.formImages(this.players, 'player');
     this.formImages(this.heads, 'head');
     this.formImages(this.bodies, 'body');
@@ -95,7 +93,6 @@ class Loader {
   }
 
   loadSounds() {
-    console.log('loadSounds()');
     this.formSounds(this.fireballSounds, 'fireball');
     this.formSounds(this.iceArrowSounds, 'iceArrow');
     this.formSounds(this.painPlayerSounds, 'painPlayer');
@@ -109,9 +106,7 @@ class Loader {
         this.assets.images[key].push(img);
         this.countLoadedAssets += 1;
         if (this.assetsLoaded()) {
-          console.log(this.assets);
           this.callback.call(this.scoupe, this.assets);
-          // this.callback(this.assets);
         }
       };
       img.src = item;
@@ -125,8 +120,6 @@ class Loader {
         this.assets.sounds[key].push(audio);
         this.countLoadedAssets += 1;
         if (this.assetsLoaded()) {
-          console.log(this.assets);
-          // this.callback(this.assets);
           this.callback.call(this.scoupe, this.assets);
         }
       };

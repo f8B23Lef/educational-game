@@ -5,7 +5,6 @@ import MessageDialog from '../../messageDialog/messageDialog';
 
 class ChooseTask {
   static async showChooseTask(scoupe, callback) {
-    console.log('showChooseTask()');
     const task = generateGeneralTask(chooseTaskData);
 
     const options = {};
@@ -22,12 +21,9 @@ class ChooseTask {
       allowOutsideClick: false,
       allowEscapeKey: false,
     });
-    console.log('result: ', result, task.answer, result === task.answer);
     if (task.answer === result) {
-      console.log(':)');
       await MessageDialog.showCorrectMessage();
     } else {
-      console.log(':(');
       isCorrect = false;
       await MessageDialog.showIncorrectMessage();
     }

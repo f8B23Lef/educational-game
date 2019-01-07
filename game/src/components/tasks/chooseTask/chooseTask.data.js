@@ -123,17 +123,3 @@ export default {
     ],
   },
 };
-
-// const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
-
-// export default () => {
-//   const typeTasks = Object.keys(radioTasks);
-//   const indexTypeTask = randomInteger(0, typeTasks.length - 1);
-//   const { question } = radioTasks[typeTasks[indexTypeTask]];
-
-//   const { tasks } = radioTasks[typeTasks[indexTypeTask]];
-//   const indexTask = randomInteger(0, tasks.length - 1);
-//   const { task, answer } = tasks[indexTask];
-
-//   return { question, task, answer };
-// };

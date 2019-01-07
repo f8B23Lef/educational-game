@@ -14,7 +14,6 @@ export default (storageKey = 'ice-wastelands') => {
       <tbody>`;
 
   const score = JSON.parse(localStorage.getItem(storageKey));
-  console.log('score: ', score);
   const sortScore = createSortArrFromObj(score);
 
   for (let i = 0; i < sortScore.length; i += 1) {

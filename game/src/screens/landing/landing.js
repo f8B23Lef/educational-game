@@ -15,7 +15,6 @@ class Landing {
 
     document.querySelectorAll('.button-start').forEach((button) => {
       button.addEventListener('click', () => {
-        console.log('click');
         const battle = new Battle();
         battle.start();
       });

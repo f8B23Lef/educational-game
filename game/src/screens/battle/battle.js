@@ -23,7 +23,6 @@ class Battle {
     })
       .then((result) => {
         if (result.value) {
-          console.log('name: ', result.value, this);
           this.characters.player = new Player(result.value);
 
           const loader = new Loader(this, this.drawComponents);
@@ -50,7 +49,6 @@ class Battle {
   }
 
   saveScore(key = 'ice-wastelands') {
-    console.log('appendScoreToLocalStorage()');
     let score = localStorage.getItem(key);
     score = score ? JSON.parse(score) : {};
 
@@ -62,32 +60,22 @@ class Battle {
     }
 
     localStorage.setItem(key, JSON.stringify(score));
-
-    console.log(JSON.parse(localStorage.getItem(key)));
   }
 
   async resolveRound() {
-    console.log('resolveRound()', this);
     if (await !this.checkGameOver()) {
-      console.log('show');
       await this.spellDialog.showSpellDialog();
     } else if (await this.checkPlayerWin()) {
-      console.log('draw');
       await this.gameAssets.sounds.painEnemy[0].play();
       await MessageDialog.showNewRoundMessage();
-      console.log('draw2');
       await this.drawComponents(this.gameAssets);
-      console.log('draw3');
       await this.canvas.renderRound(this.characters.player.round);
     } else {
-      console.log('game over', this.gameAssets.sounds.painPlayer[0]);
       await this.gameAssets.sounds.painPlayer[0].play();
       await MessageDialog.showGameOverMessage();
       await this.saveScore();
       await Score.render();
     }
-
-    console.log('pHP = ', this.characters.player.hp, 'eHP: ', this.characters.enemy.hp);
   }
 
   async manageGame(isCorrect) {
@@ -107,7 +95,6 @@ class Battle {
   }
 
   drawComponents(assets) {
-    console.log('drawComponents()', this);
     this.gameAssets = assets;
 
     this.characters.enemy = new Enemy();

@@ -175,8 +175,6 @@ class Canvas {
   }
 
   renderFireball() {
-    console.log('drawFireball()');
-
     const fireball = this.assets.images.fireball[0];
 
     let x = 550;

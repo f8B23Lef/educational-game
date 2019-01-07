@@ -6,7 +6,6 @@ import MessageDialog from '../../messageDialog/messageDialog';
 class ImageTask {
   static async showImageTask(scoupe, callback) {
     const task = generateGeneralTask(imageTaskData);
-    console.log('showImageTask()', task);
 
     const options = {};
     task.task[1].forEach((el) => {
@@ -14,6 +13,7 @@ class ImageTask {
     });
 
     let isCorrect = true;
+
     const { value: result } = await Swal({
       title: task.question,
       imageUrl: task.task[0],
@@ -22,16 +22,13 @@ class ImageTask {
       imageAlt: options,
       input: 'radio',
       inputOptions: options,
-      // inputClass: 'english',
       allowOutsideClick: false,
       allowEscapeKey: false,
     });
-    console.log('result: ', result, task.answer, result === task.answer);
+
     if (task.answer === result) {
-      console.log(':)');
       await MessageDialog.showCorrectMessage();
     } else {
-      console.log(':(');
       isCorrect = false;
       await MessageDialog.showIncorrectMessage();
     }
