@@ -1,4 +1,4 @@
-const englishTasks = {
+export default {
   'eng-ru': {
     question: 'Translate from English to Russian:',
     tasks: [
@@ -194,141 +194,20 @@ const englishTasks = {
       },
     ],
   },
-  // 'have-has': {
-  //   question: 'Insert have/has instead of dots:',
-  //   tasks: [
-  //     {
-  //       task: 'I ... a bike.',
-  //       answer: ['have'],
-  //     },
-  //     {
-  //       task: 'We ... a blue car.',
-  //       answer: ['have'],
-  //     },
-  //     {
-  //       task: 'He ... breakfast at 7 am.',
-  //       answer: ['has'],
-  //     },
-  //     {
-  //       task: 'She ... a cat.',
-  //       answer: ['has'],
-  //     },
-  //     {
-  //       task: 'My brother ... a great job.',
-  //       answer: ['has'],
-  //     },
-  //     {
-  //       task: 'We ... a new English teacher.',
-  //       answer: ['have'],
-  //     },
-  //     {
-  //       task: 'They ... a beautiful house.',
-  //       answer: ['have'],
-  //     },
-  //   ],
-  // },
-  // 'to be': {
-  //   question: 'Insert am/is/are instead of dots:',
-  //   tasks: [
-  //     {
-  //       task: 'I ... a girl.',
-  //       answer: ['am'],
-  //     },
-  //     {
-  //       task: 'He ... my brother.',
-  //       answer: ['is'],
-  //     },
-  //     {
-  //       task: 'She ... my sister.',
-  //       answer: ['is'],
-  //     },
-  //     {
-  //       task: 'I ... from London.',
-  //       answer: ['am'],
-  //     },
-  //     {
-  //       task: 'Bob ... 15 years old.',
-  //       answer: ['is'],
-  //     },
-  //     {
-  //       task: 'Anna ... a student',
-  //       answer: ['is'],
-  //     },
-  //     {
-  //       task: 'They ... our parents.',
-  //       answer: ['are'],
-  //     },
-  //     {
-  //       task: 'We ... a family.',
-  //       answer: ['are'],
-  //     },
-  //     {
-  //       task: 'It ... our dog.',
-  //       answer: ['is'],
-  //     },
-  //     {
-  //       task: 'Ice-cream ... cold.',
-  //       answer: ['is'],
-  //     },
-  //   ],
-  // },
-  // 'a-an': {
-  //   question: 'Insert article a/an instead of dots:',
-  //   tasks: [
-  //     {
-  //       task: '... cat',
-  //       answer: ['a'],
-  //     },
-  //     {
-  //       task: '... doctor',
-  //       answer: ['a'],
-  //     },
-  //     {
-  //       task: '... actor',
-  //       answer: ['an'],
-  //     },
-  //     {
-  //       task: '... apple',
-  //       answer: ['an'],
-  //     },
-  //     {
-  //       task: '... woman',
-  //       answer: ['a'],
-  //     },
-  //     {
-  //       task: '... old man',
-  //       answer: ['an'],
-  //     },
-  //     {
-  //       task: '... dog',
-  //       answer: ['a'],
-  //     },
-  //     {
-  //       task: '... arm',
-  //       answer: ['an'],
-  //     },
-  //     {
-  //       task: '... animal',
-  //       answer: ['an'],
-  //     },
-  //     {
-  //       task: '... orange',
-  //       answer: ['an'],
-  //     },
-  //   ],
-  // },
 };
 
-const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
+// class EnglishTask {
+//   static generateEnglishTask() {
+//     const typeTasks = Object.keys(englishTasks);
+//     const indexTypeTask = randomInteger(0, typeTasks.length - 1);
+//     const { question } = englishTasks[typeTasks[indexTypeTask]];
 
-export default () => {
-  const typeTasks = Object.keys(englishTasks);
-  const indexTypeTask = randomInteger(0, typeTasks.length - 1);
-  const { question } = englishTasks[typeTasks[indexTypeTask]];
+//     const { tasks } = englishTasks[typeTasks[indexTypeTask]];
+//     const indexTask = randomInteger(0, tasks.length - 1);
+//     const { task, answer } = tasks[indexTask];
 
-  const { tasks } = englishTasks[typeTasks[indexTypeTask]];
-  const indexTask = randomInteger(0, tasks.length - 1);
-  const { task, answer } = tasks[indexTask];
+//     return { question, task, answer };
+//   }
+// }
 
-  return { question, task, answer };
-};
+// export default EnglishTask;

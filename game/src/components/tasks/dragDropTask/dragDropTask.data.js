@@ -1,29 +1,4 @@
-// const engDictionary = ['car', 'apple', 'cat', 'park', 'tomato', 'banana', 'lemon', 'bed'];
-// const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
-
-// const generateWordsOrderTask = () => {
-//   const question = 'Arrange the words in alphabetical order:';
-//   const task = [];
-//   for (let i = 0; i < 4; i++) {
-//     task.push(engDictionary[randomInteger(0, engDictionary.length - 1)]);
-//   }
-//   const answer = task.sort();
-
-//   return { question, task, answer };
-// };
-
-// const generateNumbersAscOrderTask = () => {
-//   const question = 'Arrange the numbers in ascending order:';
-//   const task = [];
-//   for (let i = 0; i < 4; i++) {
-//     task.push(randomInteger(0, 30));
-//   }
-//   const answer = task.sort((a, b) => a - b);
-
-//   return { question, task, answer };
-// };
-
-const dragTasks = {
+export default {
   'words-order': {
     question: 'Arange the words in alphabetical order:',
     tasks: [
@@ -225,19 +200,4 @@ const dragTasks = {
       },
     ],
   },
-};
-
-const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
-
-export default () => {
-  const typeTasks = Object.keys(dragTasks);
-  console.log('typeTasks: ', typeTasks);
-  const indexTypeTask = randomInteger(0, typeTasks.length - 1);
-  const { question } = dragTasks[typeTasks[indexTypeTask]];
-
-  const { tasks } = dragTasks[typeTasks[indexTypeTask]];
-  const indexTask = randomInteger(0, tasks.length - 1);
-  const { task, answer } = tasks[indexTask];
-
-  return { question, task, answer };
 };

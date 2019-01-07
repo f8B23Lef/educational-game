@@ -1,6 +1,6 @@
-const mathOperators = ['+', '-', '*'];
+import { randomInteger } from '../../../utils/utils';
 
-const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
+const mathOperators = ['+', '-', '*'];
 
 const calculate = (a, b, operator) => {
   let result = 0;
@@ -80,9 +80,9 @@ const generateSequenceTask = () => {
 // const ascSort = (arr) => arr.sort();
 // const descSort = (arr) => arr.sort().reverse();
 
-const mathTaskTypes = [generateCalculateTask, generateCompareTask, generateSequenceTask];
+export default [generateCalculateTask, generateCompareTask, generateSequenceTask];
 
-export default () => {
-  const index = randomInteger(0, mathTaskTypes.length - 1);
-  return mathTaskTypes[index]();
-};
+// export default () => {
+//   const index = randomInteger(0, mathTaskTypes.length - 1);
+//   return mathTaskTypes[index]();
+// };

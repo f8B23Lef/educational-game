@@ -21,7 +21,7 @@ import garlic from './img/vegetables/garlic.png';
 import onion from './img/vegetables/onion.png';
 import potato from './img/vegetables/potato.png';
 
-const imageTasks = {
+export default {
   image: {
     question: 'Choose the correct answer:',
     tasks: [
@@ -106,16 +106,16 @@ const imageTasks = {
 };
 
 
-const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
+// const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
 
-export default () => {
-  const typeTasks = Object.keys(imageTasks);
-  const indexTypeTask = randomInteger(0, typeTasks.length - 1);
-  const { question } = imageTasks[typeTasks[indexTypeTask]];
+// export default () => {
+//   const typeTasks = Object.keys(imageTasks);
+//   const indexTypeTask = randomInteger(0, typeTasks.length - 1);
+//   const { question } = imageTasks[typeTasks[indexTypeTask]];
 
-  const { tasks } = imageTasks[typeTasks[indexTypeTask]];
-  const indexTask = randomInteger(0, tasks.length - 1);
-  const { task, answer } = tasks[indexTask];
+//   const { tasks } = imageTasks[typeTasks[indexTypeTask]];
+//   const indexTask = randomInteger(0, tasks.length - 1);
+//   const { task, answer } = tasks[indexTask];
 
-  return { question, task, answer };
-};
+//   return { question, task, answer };
+// };

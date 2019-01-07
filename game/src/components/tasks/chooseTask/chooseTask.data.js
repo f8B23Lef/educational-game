@@ -1,4 +1,4 @@
-const radioTasks = {
+export default {
   'have-has': {
     question: 'Select have/has instead of dots:',
     tasks: [
@@ -124,17 +124,16 @@ const radioTasks = {
   },
 };
 
+// const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
 
-const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
+// export default () => {
+//   const typeTasks = Object.keys(radioTasks);
+//   const indexTypeTask = randomInteger(0, typeTasks.length - 1);
+//   const { question } = radioTasks[typeTasks[indexTypeTask]];
 
-export default () => {
-  const typeTasks = Object.keys(radioTasks);
-  const indexTypeTask = randomInteger(0, typeTasks.length - 1);
-  const { question } = radioTasks[typeTasks[indexTypeTask]];
+//   const { tasks } = radioTasks[typeTasks[indexTypeTask]];
+//   const indexTask = randomInteger(0, tasks.length - 1);
+//   const { task, answer } = tasks[indexTask];
 
-  const { tasks } = radioTasks[typeTasks[indexTypeTask]];
-  const indexTask = randomInteger(0, tasks.length - 1);
-  const { task, answer } = tasks[indexTask];
-
-  return { question, task, answer };
-};
+//   return { question, task, answer };
+// };

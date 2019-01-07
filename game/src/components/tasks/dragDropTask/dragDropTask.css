@@ -1,0 +1,19 @@
+.sortable-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style: none;
+}
+
+.sortable-list__item {
+  cursor: move;
+  border: 1px solid rgba(28, 196, 196, 1);
+  margin: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(33, 252, 252, 0.8);
+}
+
+.sortable-list__item:hover {
+  background-color: rgba(28, 196, 196, 0.8);
+}
