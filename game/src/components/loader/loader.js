@@ -20,73 +20,119 @@ import rightArm3 from './img/rightArms/rightArm3.png';
 import fireball from './img/spellEffects/fireball.png';
 import iceArrow from './img/spellEffects/iceArrow.png';
 
-const players = [player];
-const heads = [head1, head2, head3];
-const bodies = [body1, body2, body3];
-const leftLegs = [leftLeg1, leftLeg2, leftLeg3];
-const rightLegs = [rightLeg1, rightLeg2, rightLeg3];
-const leftArms = [leftArm1, leftArm2, leftArm3];
-const rightArms = [rightArm1, rightArm2, rightArm3];
-const fireballs = [fireball];
-const iceArrows = [iceArrow];
+import fireballSound from './sounds/fireball.mp3';
+import iceArrowSound from './sounds/iceArrow.mp3';
+import painPlayerSound from './sounds/painPlayer.mp3';
+import painEnemySound from './sounds/painEnemy.mp3';
 
-const countImages = players.length
-  + heads.length + bodies.length
-  + leftLegs.length + rightLegs.length
-  + leftArms.length + rightArms.length
-  + fireballs.length + iceArrows.length;
+class Loader {
+  constructor(callback) {
+    this.players = [player];
+    this.heads = [head1, head2, head3];
+    this.bodies = [body1, body2, body3];
+    this.leftLegs = [leftLeg1, leftLeg2, leftLeg3];
+    this.rightLegs = [rightLeg1, rightLeg2, rightLeg3];
+    this.leftArms = [leftArm1, leftArm2, leftArm3];
+    this.rightArms = [rightArm1, rightArm2, rightArm3];
+    this.fireballs = [fireball];
+    this.iceArrows = [iceArrow];
 
-let countLoadedImages = 0;
+    this.fireballSounds = [fireballSound];
+    this.iceArrowSounds = [iceArrowSound];
+    this.painPlayerSounds = [painPlayerSound];
+    this.painEnemySounds = [painEnemySound];
 
-const imagesObj = {
-  player: [],
-  head: [],
-  body: [],
-  leftLeg: [],
-  rightLeg: [],
-  leftArm: [],
-  rightArm: [],
-  fireball: [],
-  iceArrow: [],
-};
+    this.callback = callback;
 
-let isLoaded = false;
+    this.countLoadedAssets = 0;
+    this.countAssets = this.players.length
+      + this.heads.length + this.bodies.length
+      + this.leftLegs.length + this.rightLegs.length
+      + this.leftArms.length + this.rightArms.length
+      + this.fireballs.length + this.iceArrows.length
+      + this.fireballSounds.length + this.iceArrowSounds.length
+      + this.painPlayerSounds.length + this.painEnemySounds.length;
 
-const isReady = () => countImages === countLoadedImages;
-
-const formImagesObj = (arr, key, callback) => {
-  arr.forEach((item) => {
-    const img = new Image();
-    img.onload = () => {
-      imagesObj[`${key}`].push(img);
-      countLoadedImages += 1;
-      if (isReady() && callback) {
-        isLoaded = true;
-        callback();
-        console.log(imagesObj);
-      }
+    this.assets = {
+      images: {
+        player: [],
+        head: [],
+        body: [],
+        leftLeg: [],
+        rightLeg: [],
+        leftArm: [],
+        rightArm: [],
+        fireball: [],
+        iceArrow: [],
+      },
+      sounds: {
+        fireball: [],
+        iceArrow: [],
+        painPlayer: [],
+        painEnemy: [],
+      },
     };
-    img.src = item;
-  });
-};
-
-export const loadImages = (callback) => {
-  console.log('loadImages()');
-  // const pathToHeads = require.context('./img', false).keys();
-  // console.log(pathToHeads);
-  if (!isLoaded) {
-    formImagesObj(players, 'player', callback);
-    formImagesObj(heads, 'head', callback);
-    formImagesObj(bodies, 'body', callback);
-    formImagesObj(leftLegs, 'leftLeg', callback);
-    formImagesObj(rightLegs, 'rightLeg', callback);
-    formImagesObj(leftArms, 'leftArm', callback);
-    formImagesObj(rightArms, 'rightArm', callback);
-    formImagesObj(fireballs, 'fireball', callback);
-    formImagesObj(iceArrows, 'iceArrow', callback);
-  } else {
-    callback();
   }
-};
 
-export const getImagesObj = () => imagesObj;
+  loadAssets() {
+    console.log(this.countLoadedAssets, this.countAssets);
+    this.loadImages();
+    this.loadSounds();
+  }
+
+  loadImages() {
+    console.log('loadImages()');
+    this.formImages(this.players, 'player');
+    this.formImages(this.heads, 'head');
+    this.formImages(this.bodies, 'body');
+    this.formImages(this.leftLegs, 'leftLeg');
+    this.formImages(this.rightLegs, 'rightLeg');
+    this.formImages(this.leftArms, 'leftArm');
+    this.formImages(this.rightArms, 'rightArm');
+    this.formImages(this.fireballs, 'fireball');
+    this.formImages(this.iceArrows, 'iceArrow');
+  }
+
+  loadSounds() {
+    console.log('loadSounds()');
+    this.formSounds(this.fireballSounds, 'fireball');
+    this.formSounds(this.iceArrowSounds, 'iceArrow');
+    this.formSounds(this.painPlayerSounds, 'painPlayer');
+    this.formSounds(this.painEnemySounds, 'painEnemy');
+  }
+
+  formImages(arr, key) {
+    arr.forEach((item) => {
+      const img = new Image();
+      img.onload = () => {
+        this.assets.images[key].push(img);
+        this.countLoadedAssets += 1;
+        if (this.assetsLoaded()) {
+          console.log(this.assets);
+          this.callback(this.assets);
+        }
+      };
+      img.src = item;
+    });
+  }
+
+  formSounds(arr, key) {
+    arr.forEach((item) => {
+      const audio = new Audio(item);
+      audio.onloadeddata = () => {
+        this.assets.sounds[key].push(audio);
+        this.countLoadedAssets += 1;
+        if (this.assetsLoaded()) {
+          console.log(this.assets);
+          this.callback(this.assets);
+        }
+      };
+    });
+  }
+
+  assetsLoaded() {
+    return this.countAssets === this.countLoadedAssets;
+  }
+}
+
+export default Loader;
