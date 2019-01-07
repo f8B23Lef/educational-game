@@ -6,10 +6,6 @@ class Player {
     this.round = 1;
     this.score = 0;
   }
-
-  // set name(name) {
-  //   this.name = name;
-  // }
 }
 
 export default Player;
