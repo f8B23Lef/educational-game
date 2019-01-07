@@ -1,3 +1,1 @@
-export default `
-<canvas id="canvas" width="1600" height="900"></canvas>
-`;
+export default '<canvas id="canvas" width="1920" height="940"></canvas>';
