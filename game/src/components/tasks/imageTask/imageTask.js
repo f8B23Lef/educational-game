@@ -4,7 +4,7 @@ import { generateGeneralTask } from '../../../utils/utils';
 import MessageDialog from '../../messageDialog/messageDialog';
 
 class ImageTask {
-  static async showImageTask(callback) {
+  static async showImageTask(scoupe, callback) {
     const task = generateGeneralTask(imageTaskData);
     console.log('showImageTask()', task);
 
@@ -36,7 +36,7 @@ class ImageTask {
       await MessageDialog.showIncorrectMessage();
     }
 
-    await callback(isCorrect);
+    await callback.call(scoupe, isCorrect);
   }
 }
 

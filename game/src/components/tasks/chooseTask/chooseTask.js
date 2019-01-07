@@ -4,7 +4,7 @@ import { generateGeneralTask } from '../../../utils/utils';
 import MessageDialog from '../../messageDialog/messageDialog';
 
 class ChooseTask {
-  static async showChooseTask(callback) {
+  static async showChooseTask(scoupe, callback) {
     console.log('showChooseTask()');
     const task = generateGeneralTask(chooseTaskData);
 
@@ -32,7 +32,7 @@ class ChooseTask {
       await MessageDialog.showIncorrectMessage();
     }
 
-    await callback(isCorrect);
+    await callback.call(scoupe, isCorrect);
   }
 }
 

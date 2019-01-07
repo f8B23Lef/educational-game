@@ -26,7 +26,7 @@ import painPlayerSound from './sounds/painPlayer.mp3';
 import painEnemySound from './sounds/painEnemy.mp3';
 
 class Loader {
-  constructor(callback) {
+  constructor(scoupe, callback) {
     this.players = [player];
     this.heads = [head1, head2, head3];
     this.bodies = [body1, body2, body3];
@@ -42,6 +42,7 @@ class Loader {
     this.painPlayerSounds = [painPlayerSound];
     this.painEnemySounds = [painEnemySound];
 
+    this.scoupe = scoupe;
     this.callback = callback;
 
     this.countLoadedAssets = 0;
@@ -109,7 +110,8 @@ class Loader {
         this.countLoadedAssets += 1;
         if (this.assetsLoaded()) {
           console.log(this.assets);
-          this.callback(this.assets);
+          this.callback.call(this.scoupe, this.assets);
+          // this.callback(this.assets);
         }
       };
       img.src = item;
@@ -124,7 +126,8 @@ class Loader {
         this.countLoadedAssets += 1;
         if (this.assetsLoaded()) {
           console.log(this.assets);
-          this.callback(this.assets);
+          // this.callback(this.assets);
+          this.callback.call(this.scoupe, this.assets);
         }
       };
     });

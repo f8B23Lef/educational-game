@@ -7,7 +7,7 @@ import { generateGeneralTask, compareArrays } from '../../../utils/utils';
 import MessageDialog from '../../messageDialog/messageDialog';
 
 class DragDropTask {
-  static showDragTask(callback) {
+  static showDragTask(scoupe, callback) {
     console.log('showDragTask()');
     const task = generateGeneralTask(dragDropTaskData);
     console.log(task);
@@ -30,7 +30,7 @@ class DragDropTask {
           isCorrect = false;
           await MessageDialog.showIncorrectMessage();
         }
-        await callback(isCorrect);
+        await callback.call(scoupe, isCorrect);
       },
     });
     Sortable.create(document.querySelector('.sortable-list'));

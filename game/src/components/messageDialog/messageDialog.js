@@ -37,6 +37,17 @@ class MessageDialog {
       customClass: 'animated bounceInDown',
     });
   }
+
+  static showGameOverMessage() {
+    console.log('showGameOverMessage()');
+    return Swal({
+      title: 'Game over',
+      allowOutsideClick: 'false',
+      allowEscapeKey: 'false',
+      animation: false,
+      customClass: 'animated bounceInDown',
+    });
+  }
 }
 
 export default MessageDialog;

@@ -5,7 +5,7 @@ import { generateMathTask } from '../../../utils/utils';
 import MessageDialog from '../../messageDialog/messageDialog';
 
 class MathTask {
-  static async showMathTask(callback) {
+  static async showMathTask(scoupe, callback) {
     console.log('showMathTask()');
     const task = generateMathTask(mathTaskData);
     let isCorrect = true;
@@ -28,7 +28,7 @@ class MathTask {
       await MessageDialog.showIncorrectMessage();
     }
 
-    await callback(isCorrect);
+    await callback.call(scoupe, isCorrect);
   }
 }
 

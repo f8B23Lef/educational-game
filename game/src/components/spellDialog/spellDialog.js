@@ -11,7 +11,8 @@ import ChooseTask from '../tasks/chooseTask/chooseTask';
 import ImageTask from '../tasks/imageTask/imageTask';
 
 class SpellDialog {
-  constructor(callback) {
+  constructor(scoupe, callback) {
+    this.scoupe = scoupe;
     this.callBack = callback;
   }
 
@@ -28,27 +29,27 @@ class SpellDialog {
       onBeforeOpen: () => {
         document.querySelector('.math-button').addEventListener('click', () => {
           console.log('click math');
-          MathTask.showMathTask(this.callBack);
+          MathTask.showMathTask(this.scoupe, this.callBack);
         });
 
         document.querySelector('.english-button').addEventListener('click', () => {
           console.log('click english');
-          EnglishTask.showEnglishTask(this.callBack);
+          EnglishTask.showEnglishTask(this.scoupe, this.callBack);
         });
 
         document.querySelector('.drag-button').addEventListener('click', () => {
           console.log('click drag-drop');
-          DragDropTask.showDragTask(this.callBack);
+          DragDropTask.showDragTask(this.scoupe, this.callBack);
         });
 
         document.querySelector('.radio-button').addEventListener('click', () => {
           console.log('click radio-drop');
-          ChooseTask.showChooseTask(this.callBack);
+          ChooseTask.showChooseTask(this.scoupe, this.callBack);
         });
 
         document.querySelector('.image-button').addEventListener('click', () => {
           console.log('click image-drop');
-          ImageTask.showImageTask(this.callBack);
+          ImageTask.showImageTask(this.scoupe, this.callBack);
         });
       },
       onOpen: () => {
