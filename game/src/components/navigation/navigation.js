@@ -1,8 +1,8 @@
-import template from './nav.template';
-import './nav.css';
+import template from './navigation.template';
+import './navigation.css';
 
 class Navigation {
-  static draw() {
+  static render() {
     const contentEl = document.querySelector('body');
     contentEl.insertAdjacentHTML('afterbegin', template);
   }

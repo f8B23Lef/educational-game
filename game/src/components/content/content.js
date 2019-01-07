@@ -2,8 +2,8 @@ import template from './content.template';
 import './content.css';
 
 class Content {
-  static draw() {
-    const contentEl = document.querySelector('header');
+  static render() {
+    const contentEl = document.querySelector('nav');
     contentEl.insertAdjacentHTML('afterend', template);
   }
 }
