@@ -1,7 +1,0 @@
-# ignore
-node_modules
-dist/images
-dist/sounds
-dist/main.js
-coverage
-package-lock.json

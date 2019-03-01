@@ -1,4 +1,7 @@
-.idea
+# ignore
 node_modules
-*.bundle.js
-*.log
+dist/images
+dist/sounds
+dist/main.js
+coverage
+package-lock.json
